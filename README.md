@@ -14,7 +14,7 @@ Reference:
 
 ### Setting up a LEMP server
 
-1. Set up your ssh hosts file `~/.ssh/config` and copy keys to the server. 
+1. Set up your ssh hosts file `~/.ssh/config` so it includes the server(s) you wish to configure.
 
 2. Create your Ansible hosts file (refer to [Ansible docs](http://www.ansibleworks.com/docs/intro_installation.html)). 
 
@@ -26,7 +26,6 @@ Reference:
          
          
    Note: you can also specify a hosts file, it does not need to reside in `/etc/ansible`. For example, I like to use different host files for production and test servers. Example:
-   
-       ansible-playbook -i prod lemp.yml
-         
+
+         ansible-playbook -i prod lemp.yml
          
