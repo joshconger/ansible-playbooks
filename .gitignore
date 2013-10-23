@@ -1,0 +1,7 @@
+# Do not check in my personal settings
+hosts
+prod
+test
+group_vars/all
+
+

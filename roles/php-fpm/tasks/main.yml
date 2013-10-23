@@ -1,0 +1,19 @@
+---
+- name: Install php-fpm and deps
+  yum: name={{ item }} state=present
+  with_items:
+    - php
+    - php-fpm
+    - php-enchant
+    - php-IDNA_Convert
+    - php-mbstring
+    - php-mysql
+    - php-PHPMailer
+    - php-process
+    - php-xml
+
+- name: Configure php.ini
+  copy: src=php.ini dest=/etc
+
+- name: Start php-fpm
+  service: name=php-fpm state=started enabled=true

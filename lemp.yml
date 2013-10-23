@@ -1,0 +1,10 @@
+---
+- name: Install MySQL, Nginx, and PHP-FPM
+  hosts: lemp-servers
+  user: root
+
+  roles:
+    - common
+    - mysql
+    - nginx
+    - php-fpm
