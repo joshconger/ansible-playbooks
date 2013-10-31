@@ -17,12 +17,12 @@
   notify:
     - restart php-fpm
 
-  name: Configure php-fpm
+- name: Configure php-fpm
   copy: src=php-fpm.conf dest=/etc
   notify:
     - restart php-fpm
 
-  name: Configure php-fpm pool
+- name: Configure php-fpm pool
   copy: src=www.conf dest=/etc/php-fpm.d
   notify:
     - restart php-fpm
