@@ -1,0 +1,26 @@
+---
+
+- name: Create nginx cache directory
+  command: mkdir -p /var/lib/nginx/tmp/cache
+
+- name: Adjust owner on nginx cache directory
+  command: chown nginx:nginx /var/lib/nginx/tmp/cache
+
+- name: Adjust permissions on nginx cache directory
+  command: chmod 700 /var/lib/nginx/tmp/cache
+
+- name: Create directory for website
+  command: mkdir -p /opt/{{domain_name.slug}} && mkdir -p /opt/{{domain_name.slug}}/wwwroot && mkdir -p /opt/{{domain_name.slug}}/wwwroot.uploads
+
+- name: Adjust permissions on website directories
+  command: chown -R nginx:nginx /opt/{{domain_name.slug}}/wwwroot.uploads
+
+- name: Configure nginx for Wordpress caching
+  template: src=nginx.conf dest=/etc/nginx/nginx.conf
+  notify: restart nginx
+
+- name: Configure this website for nginx
+  template: src=website.conf dest=/etc/nginx/conf.d/{{domain_name.slug}}.conf
+  notify: restart nginx
+
+# TODO: You'll still need to create the mysql login, and copy your files to the server

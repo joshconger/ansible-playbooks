@@ -1,0 +1,19 @@
+---
+- name: Configure Wordpress Server
+
+  hosts: webserver-prod-01
+
+  user: root
+
+  vars:
+    domain_name:
+      slug: example
+      primary: example.net
+      redirect: www.example.net
+
+  roles:
+    - common
+    - mysql
+    - nginx
+    - php-fpm
+    - wordpress

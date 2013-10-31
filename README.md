@@ -6,26 +6,36 @@ CentOS application servers.
 
 ## Getting Started
 
-Reference:  
+1. You'll need to install Ansible.  
 [http://www.ansibleworks.com/docs/intro_installation.html](http://)
+
+2. Make sure your ssh public key is copied to your server(s) and your ssh hosts file `~/.ssh/config` has an entry for the servers you are building.
+
+3. Decide where you're going to define your hosts file for Ansible (refer to [Ansible docs](http://www.ansibleworks.com/docs/intro_installation.html)). Instead of the default `/etc/ansible/hosts`, I usually create host files named `test` and `prod` so I can select which group of servers I am targetting using the `-i` switch.  
+Example: `ansible-playbook -i prod lemp.yml`
 
 
 ## Example Plays
 
 ### Setting up a LEMP server
 
-1. Set up your ssh hosts file `~/.ssh/config` so it includes the server(s) you wish to configure.
+Create the file `group_vars/all`. There is a placeholder `group_vars/all-EXAMPLE` you can use to get started.
 
-2. Create your Ansible hosts file (refer to [Ansible docs](http://www.ansibleworks.com/docs/intro_installation.html)). 
+Assuming your target system(s) are defined in `/etc/ansible/hosts` you should be able to run:
 
-3. Create the file `group_vars/all`. There is a placeholder `group_vars/all-EXAMPLE` you can use to get started.
+    ansible-playbook lemp.yml
 
-4. Assuming your target system(s) are defined in `/etc/ansible/hosts` you should be able to run:
+### Setting up a Wordpress Server
 
-         ansible-playbook lemp.yml
-         
-         
-   Note: you can also specify a hosts file, it does not need to reside in `/etc/ansible`. For example, I like to use different host files for production and test servers. Example:
+Here's a simple play that builds on the LEMP deployment by customizing Nginx for your domain 
+with Wordpress specific caching.
 
-         ansible-playbook -i prod lemp.yml
-         
+Adjust the parameters for your website in `wordpress.yml` and then:
+
+    ansible-playbook wordpress.yml
+
+
+## Reference Material
+
+[Ansible Docs](http://www.ansibleworks.com/docs/)  
+[Pedantically Commented Playbook (Gist)](https://gist.github.com/andrewwood/7129910)  

@@ -2,16 +2,13 @@
 - name: Install nginx
   yum: name=nginx state=present
 
-# - name: Make sure nginx starts on reboot
-#   action: command /sbin/chkconfig nginx on
-
-- name: Create placeholder phpinfo() for default page
-  copy: src=index.php dest=/usr/share/nginx/html
+- name: Copy nginx configuration for default site
+  copy: src=nginx.conf dest=/etc/nginx
+  notify: restart nginx
 
 - name: Copy nginx configuration
   copy: src=default.conf dest=/etc/nginx/conf.d
   notify: restart nginx
 
-- name: Copy nginx configuration for default site
-  copy: src=nginx.conf dest=/etc/nginx
-  notify: restart nginx
+- name: Create placeholder phpinfo() for default page
+  copy: src=index.php dest=/usr/share/nginx/html

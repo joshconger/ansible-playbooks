@@ -12,3 +12,6 @@
 - name: Set up sshd
   copy: src=sshd_config dest=/etc/ssh
   notify: restart sshd
+
+- name: Install vim
+  yum: name=vim state=present
