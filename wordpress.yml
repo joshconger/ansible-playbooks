@@ -1,5 +1,5 @@
 ---
-- name: Configure Wordpress Server
+- name: Configure a Low End Wordpress Server
 
   hosts: webserver-prod-01
 
@@ -10,6 +10,7 @@
       slug: example
       primary: example.net
       redirect: www.example.net
+      max_upload_filesize: 5M
 
   roles:
     - common
